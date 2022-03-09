@@ -34,12 +34,13 @@ body {
     
 
  h1 {
-    border: 5px solid black;
+    border: 1vh solid black;
     background-color: white;
     height: 10vh;
-    width: 60vh;
-    font-size: 3rem;
+    width: fit-content;
+    font-size: 10vh;
     text-align: center;
+
 }
 
 .startButton {
@@ -48,6 +49,6 @@ body {
     width: fit-content;
     font-size: 2rem;
     background-color: red;
-    border: 5px solid black;
+    border: 1vh solid black;
 }
 
