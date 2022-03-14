@@ -14,29 +14,24 @@
         </div> -->
             <div class="gameTitle">
                 <h1>Let's Get Trivial!</h1>
-                <h2 class="player">Player Score : 0</h2>
-                <h2 class="turns">Turns Left : 0</h2>
-                <p class="question">Question</p>
-                <div class="questionAnswer">
-                <button class="answer">A</button>
-                <button class="answer">B</button>
-                <button class="answer">C</button>
-                <button class="answer">D</button>
+                <h2 class="player game hidden">Player Score : 0</h2>
+                <h2 class="turns game hidden">Turns Left : 10</h2>
+                <p class="question game hidden">What is the price of Tea in China</p>
+                <div class="questionAnswer game">
+                <button class="answer game hidden" id="a">A</button>
+                <button class="answer game hidden" id="b">B</button>
+                <button class="answer game hidden" id="c">C</button>
+                <button class="answer game hidden" id="d">D</button>
+                
                 </div>
-                <!-- <button class="startButton">START GAME</button> -->
-            </div>
-        <!-- <div class="player">
-            <h2 class="player2">Player 2 Score : 0</h2>
-        </div> -->
+                <div>
+                    <button class="startGame" id="started">Start Game</button>
+                    <button disabled class="next game hidden">Next Question</button>
+                    <button class="restart game hidden">Restart</button>
+
+                </div>
+            
     
-    </div>
-       
-        <!-- <div class="startButtonContainer">
-            <button class="startButton">START GAME</button>
-            </div> -->
-
-
-    </div> -->
 
 
 
@@ -44,6 +39,6 @@
 
 
 
-    <script src="question-choice.js"></script>
+    <script src="game-screen-logic.js"></script>
 </body>
 </html>

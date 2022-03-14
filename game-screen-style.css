@@ -29,6 +29,7 @@ body {
     flex-basis: 50%;
     justify-content: center;
     align-items: center;
+    margin-top: 40vh;
 }
 
 .questionAnswer {
@@ -50,7 +51,7 @@ h1 {
     
 }
 
-button {
+.answer {
     height: 5vh;
     width: 35vw;
     font-size: 3vh;
@@ -60,6 +61,29 @@ button {
     
 }
 
+.answer:hover {
+    border-color: black;
+}
+
+.next .restart {
+   height: 4vh; 
+   width: fit-content;
+   margin-top: 5vh;
+   text-align: center;
+   font-size: 3vh;
+}
+
 p {
     font-size: 5vh;
+}
+
+.hidden {
+    display: none;
+}
+
+.startGame {
+    height: fit-content;
+    width: fit-content;
+    font-size: 3vh;
+    background-color: white;
 }
