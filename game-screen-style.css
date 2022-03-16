@@ -65,6 +65,8 @@ h1 {
     border-color: black;
 }
 
+
+
 .next .restart {
    height: 4vh; 
    width: fit-content;
@@ -86,4 +88,8 @@ p {
     width: fit-content;
     font-size: 3vh;
     background-color: white;
+}
+
+.question {
+    margin-top: auto;
 }

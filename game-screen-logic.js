@@ -125,10 +125,17 @@ const questions= [
 
 let shuffledAnswers
 let shuffleQuestions 
+
+let restartButton = document.querySelector('.restart')
+restartButton.addEventListener('click', initialize)
 function initialize() {
-    turns = 10
+    turns = 11
     points = 0
-    
+    scoreDisplay.innerText= `Player Score : 0`
+    shuffledQuestions = questionsAndAnswers.sort(() => Math.random() - .5)
+    nextButton.classList.remove("hidden")
+    nextQuestion()
+
     //start game button and restart button
     // switch hidden Off
     // var.document.style.margintop = 0vh
@@ -146,22 +153,28 @@ let nextButton = document.querySelector(".next")
 nextButton.addEventListener("click", nextQuestion)
 let questionDisplay = document.querySelector(".question")
 let turnsDisplay = document.querySelector(".turns")
+let scoreDisplay = document.querySelector(".player")
 function nextQuestion() {
-        if (turns > 1) {
+        if (turns > 1 ) {
         turns --
         nextButton.disabled = true
         turnsDisplay.innerText= `Turns Left: ${turns}`
         console.log(questionsAndAnswers[turns-1].question)
         questionDisplay.innerText= `${questionsAndAnswers[turns-1].question}`
         shuffledAnswers = questionsAndAnswers[turns-1].answers.sort(() => Math.random() - .5)
-        aButton.innerText = `${questionsAndAnswers[turns-1].answers[0].choice}`
+        aButton.innerText = `${questionsAndAnswers[turns-1].answers[0].choice}` 
         bButton.innerText = `${questionsAndAnswers[turns-1].answers[1].choice}`
         cButton.innerText = `${questionsAndAnswers[turns-1].answers[2].choice}`
         dButton.innerText = `${questionsAndAnswers[turns-1].answers[3].choice}`
+        aButton.dataset.correct = `${questionsAndAnswers[turns-1].answers[0].correct}`
+        bButton.dataset.correct = `${questionsAndAnswers[turns-1].answers[1].correct}`
+        cButton.dataset.correct = `${questionsAndAnswers[turns-1].answers[2].correct}`
+        dButton.dataset.correct = `${questionsAndAnswers[turns-1].answers[3].correct}`
 
         } else {
             nextButton.classList.add("hidden")
         }
+        answerButtons.forEach(changeAnswerColorBack)
     }
     
     
@@ -175,20 +188,116 @@ let answerButtons = document.querySelectorAll('.answer')
 function addSelectAnswerListener(element) {
     element.addEventListener("click", selectAnswer)
 }
+
+function displayCorrect(element){
+    if (element.dataset.correct === "true") {
+        element.style.backgroundColor = "green"
+    }
+}
 function changeAnswerColorGreen(element){
     element.style.backgroundColor= "green"
 }
 function changeAnswerColorRed(element){
     element.style.backgroundColor= "red"
 }
+function changeAnswerColorBack(element){
+    element.style.backgroundColor= "white"
+}
 answerButtons.forEach(addSelectAnswerListener)
-function selectAnswer() {
-    //add score if correct
-    //add text of correct or incorrect
-    answerButtons.forEach(changeAnswerColorGreen)
-    // answerButtons.forEach(changeAnswerColorRed)
+function selectAnswer(event) {
+    let answerLetter= event.target.id
+    if (aButton.dataset.correct === "true" && answerLetter === "a"){
+        changeAnswerColorGreen(aButton)
+        points ++
+        scoreDisplay.innerText = `Player Score : ${points}`
+        questionDisplay.innerText= "Correct!"
+        console.log(event.target)
+    }
+    else if (aButton.dataset.correct === "false" && answerLetter === "a") {
+        changeAnswerColorRed(aButton)
+        questionDisplay.innerText = "Incorrect!"
+    }else if (bButton.dataset.correct === "true" && answerLetter === "b"){
+        changeAnswerColorGreen(bButton)
+        points ++
+        scoreDisplay.innerText = `Player Score : ${points}`
+        questionDisplay.innerText= "Correct!"
+        console.log(event.target)
+    }
+    else if (bButton.dataset.correct === "false" && answerLetter === "b") {
+        changeAnswerColorRed(bButton)
+        questionDisplay.innerText = "Incorrect!"
+    }else if (cButton.dataset.correct === "true" && answerLetter === "c"){
+        changeAnswerColorGreen(cButton)
+        points ++
+        scoreDisplay.innerText = `Player Score : ${points}`
+        questionDisplay.innerText= "Correct!"
+        console.log(event.target)
+    }
+    else if (cButton.dataset.correct === "false" && answerLetter === "c") {
+        changeAnswerColorRed(cButton)
+        questionDisplay.innerText = "Incorrect!"
+    }else if (dButton.dataset.correct === "true" && answerLetter === "d"){
+        changeAnswerColorGreen(dButton)
+        points ++
+        scoreDisplay.innerText = `Player Score : ${points}`
+        questionDisplay.innerText= "Correct!"
+        console.log(event.target)
+    }
+    else if (dButton.dataset.correct === "false" && answerLetter === "d") {
+        changeAnswerColorRed(dButton)
+        questionDisplay.innerText = "Incorrect!"}
+        answerButtons.forEach(displayCorrect)
+        
+    
+    // if (aButton.dataset.correct === "true"){
+    //     changeAnswerColorGreen(aButton)
+    //     // changeAnswerColorRed()
+
+    //     if (answerLetter === "a") {points ++}
+    //     console.log(points, answerLetter, event.target)
+    //     scoreDisplay.innerText = `Player Score : ${points}`
+    //     console.log(aButton)
+    // }
+    // else if (aButton.dataset.correct === "false") {
+    //     changeAnswerColorRed(aButton)
+    //     scoreDisplay.innerText = `Player Score : ${points}`
+    //     console.log(aButton)}
+    // }
+    // if (bButton.dataset.correct === "true"){
+    //     changeAnswerColorGreen(bButton)
+    //     points ++
+    //     scoreDisplay.innerText = `Player Score : ${points}`
+    // }
+    // else if (bButton.dataset.correct === "false") {
+    //     changeAnswerColorRed(bButton)
+        
+    //     scoreDisplay.innerText = `Player Score : ${points}`
+    // }
+    // if (cButton.dataset.correct === "true"){
+    //     changeAnswerColorGreen(cButton)
+    //     points ++
+    //     scoreDisplay.innerText = `Player Score : ${points}`
+    // }
+    // else if (cButton.dataset.correct === "false") {
+    //     changeAnswerColorRed(cButton)
+    //     scoreDisplay.innerText = `Player Score : ${points}`
+    // }
+    // if (dButton.dataset.correct === "true"){
+    //     changeAnswerColorGreen(dButton)
+    //     points ++
+    //     scoreDisplay.innerText = `Player Score : ${points}`
+        
+    // }
+    // else if (dButton.dataset.correct === "false") {
+    //     changeAnswerColorRed(dButton)
+    //     scoreDisplay.innerText = `Player Score : ${points}`
+    // }
     nextButton.disabled = false
     console.log("working")
+}
+
+function selectAnswerMod(element) {
+    
 }
 
 let startGameButton = document.querySelector(".startGame")
