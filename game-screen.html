@@ -14,11 +14,15 @@
         </div> -->
             <div class="gameTitle">
                 <h1>Let's Get Trivial!</h1>
-                <h3><button class="audio" onclick="soundOffOn()">Sound Off</button></h3>
+                <!-- <h3><button class="audio" onclick="soundOffOn()">Sound Off</button></h3> -->
+                <div class="scoreboard game hidden">
                 <h2 class="player game hidden">Player Score : 0</h2>
                 <h2 class="turns game hidden">Turns Left : 10</h2>
+                </div>
+                <div class="questionBox game hidden">
                 <p class="question game hidden">What is the price of Tea in China</p>
                 <p class="rightOrWrong game hidden"></p>
+                </div>
                 <div class="questionAnswer game">
                 <button class="answer game hidden" id="a" data-correct="">A</button>
                 <button class="answer game hidden" id="b" data-correct="">B</button>
@@ -26,16 +30,18 @@
                 <button class="answer game hidden" id="d" data-correct="">D</button>
                 
                 </div>
-                <div>
+                <div class="bottomPanel">
                     <button class="startGame" id="started">Start Game</button>
                     <button disabled class="next game hidden">Next Question</button>
                     <button class="restart game hidden">Restart</button>
+                    <h3><button class="audio game" onclick="soundOffOn()">Sound Off</button></h3>
 
                 </div>
-                <div class="endWin end hidden">You Are a Trivia Master!</div>
+                <div class="endWin end hidden">Congratulations, You Are an Official Trivia Nerd!</div>
                 <div class="endGood end hidden">Your Trivia Knowledge Is Pretty Good, Keep Working On It!</div>
                 <div class="endMeh end hidden">Your Trivia Knowledge Is Lacking, Better Luck Next Time!</div>
                 <button class="restart-end hidden">New Game</button>
+                <h3><button class="audio audio-end hidden" onclick="soundOffOn()">Sound Off</button></h3>
             
     
 

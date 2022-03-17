@@ -116,99 +116,6 @@ function fetchQuestions() {
 
 fetchQuestions()
 console.log(questionsResponse)
-    // [
-    //     {
-    //         question:questionsResponse[0].question,
-    //         answers: [
-    //             {choice:questionsResponse[0].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[0].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[0].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[0].correct_answer, correct:true}
-    //         ]
-    //     },
-    //     {
-    //         question:questionsResponse[1].question,
-    //         answers: [
-    //             {choice:questionsResponse[1].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[1].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[1].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[1].correct_answer, correct:true}
-    //         ]
-    //     },
-    //     {
-    //         question:questionsResponse[2].question,
-    //         answers: [
-    //             {choice:questionsResponse[2].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[2].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[2].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[2].correct_answer, correct:true}
-    //         ]
-    //     },
-    //     {
-    //         question:questionsResponse[3].question,
-    //         answers: [
-    //             {choice:questionsResponse[3].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[3].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[3].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[3].correct_answer, correct:true}
-    //         ]
-    //     },
-    //     {
-    //         question:questionsResponse[4].question,
-    //         answers: [
-    //             {choice:questionsResponse[4].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[4].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[4].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[4].correct_answer, correct:true}
-    //         ]
-    //     },
-    //     {
-    //         question:questionsResponse[5].question,
-    //         answers: [
-    //             {choice:questionsResponse[5].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[5].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[5].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[5].correct_answer, correct:true}
-    //         ]
-            
-    //     },{
-        
-    //         question:questionsResponse[6].question,
-    //         answers: [
-    //             {choice:questionsResponse[6].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[6].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[6].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[6].correct_answer, correct:true}
-    //         ]
-    //     },
-    //     {
-    //         question:questionsResponse[7].question,
-    //         answers: [
-    //             {choice:questionsResponse[7].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[7].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[7].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[7].correct_answer, correct:true}
-    //         ]
-    //     },
-    //     {
-    //         question:questionsResponse[8].question,
-    //         answers: [
-    //             {choice:questionsResponse[8].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[8].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[8].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[8].correct_answer, correct:true}
-    //         ]
-    //     },
-    //     {
-    //         question:questionsResponse[9].question,
-    //         answers: [
-    //             {choice:questionsResponse[9].incorrect_answers[0], correct:false},
-    //             {choice:questionsResponse[9].incorrect_answers[1], correct:false},
-    //             {choice:questionsResponse[9].incorrect_answers[2], correct:false},
-    //             {choice:questionsResponse[9].correct_answer, correct:true}
-    //         ]
-    //     }
-    // ]
 
 let shuffledAnswers
 let shuffleQuestions 
@@ -217,6 +124,7 @@ let restartButton = document.querySelector('.restart')
 restartButton.addEventListener('click', initialize)
 document.querySelector(".restart-end").addEventListener("click",initialize)
 function initialize() {
+    gameOver=false
     fetchQuestions()
     console.log(questionsResponse)
     turns = 11
@@ -239,6 +147,7 @@ function initialize() {
 
 
 gameStarted = false
+gameOver = false
 let soundsOn = true
 let aButton = document.querySelector('#a')
 let bButton = document.querySelector('#b')
@@ -255,6 +164,7 @@ let winAudio = new Audio("win.mp3")
 let goodAudio = new Audio("good.mp3")
 let loserAudio = new Audio("bad.mp3")
 let audioButton = document.querySelector(".audio")
+let endScreenAudioButton = document.querySelector('.audio-end')
 function playStartMusic(){
     startAudio.play()
 }
@@ -266,14 +176,16 @@ function soundOffOn(){
         stopAudio(questionAudio)
         stopAudio(startAudio)
         audioButton.innerText = "Sound On"
+        endScreenAudioButton.innerText = "Sound On"
         
         // if (gameStarted === false){startGameAudio.classList.add('hidden')}
         
     } else if (soundsOn === false){
         soundsOn= true
-        if ( gameStarted === true)questionAudio.play()
+        if ( gameStarted === true && gameOver===false)questionAudio.play()
         if (gameStarted === false){playStartMusic}
         audioButton.innerText = "Sound Off"
+        endScreenAudioButton.innerText = "Sound Off"
         // {startGameAudio.classList.remove('hidden')}
     }
 }
@@ -300,16 +212,23 @@ function nextQuestion() {
         dButton.dataset.correct = `${questionsAndAnswers[turns-1].answers[3].correct}`
 
         } else {
+            gameOver = true
             nextButton.classList.add("hidden")
             gameItems.forEach(addHidden)
             restartButton.classList.remove("hidden")
             restartButton.innerText= "New Game"
             document.querySelector(".restart-end").classList.remove("hidden")
+            document.querySelector(".audio-end").classList.remove("hidden")
             restartButton.classList.add("hidden")
 
-            if (points === 10){winEnd.classList.remove("hidden"); winAudio.play()}
-            if (points > 6 && points <10) {goodEnd.classList.remove("hidden") ; goodAudio.play()}
-            if (points < 7) {mehEnd.classList.remove("hidden"); loserAudio.play()}
+            if (points === 10){winEnd.classList.remove("hidden")}
+            if (points === 10 && soundsOn=== true){winAudio.play()}
+            if (points > 6 && points <10) {goodEnd.classList.remove("hidden")}
+            if (points > 6 && points < 10 && soundsOn===true){goodAudio.play()}
+            if (points < 7) {mehEnd.classList.remove("hidden")}
+            if (points < 7 && soundsOn=== true){loserAudio.play()}
+            stopAudio(questionAudio)
+            
         }
         answerButtons.forEach(changeAnswerColorBack)
         answerButtons.forEach(enableAnswers)
@@ -420,50 +339,6 @@ function selectAnswer(event) {
             nextButton.innerText = "Finish"
         }
         
-    
-    // if (aButton.dataset.correct === "true"){
-    //     changeAnswerColorGreen(aButton)
-    //     // changeAnswerColorRed()
-
-    //     if (answerLetter === "a") {points ++}
-    //     console.log(points, answerLetter, event.target)
-    //     scoreDisplay.innerText = `Player Score : ${points}`
-    //     console.log(aButton)
-    // }
-    // else if (aButton.dataset.correct === "false") {
-    //     changeAnswerColorRed(aButton)
-    //     scoreDisplay.innerText = `Player Score : ${points}`
-    //     console.log(aButton)}
-    // }
-    // if (bButton.dataset.correct === "true"){
-    //     changeAnswerColorGreen(bButton)
-    //     points ++
-    //     scoreDisplay.innerText = `Player Score : ${points}`
-    // }
-    // else if (bButton.dataset.correct === "false") {
-    //     changeAnswerColorRed(bButton)
-        
-    //     scoreDisplay.innerText = `Player Score : ${points}`
-    // }
-    // if (cButton.dataset.correct === "true"){
-    //     changeAnswerColorGreen(cButton)
-    //     points ++
-    //     scoreDisplay.innerText = `Player Score : ${points}`
-    // }
-    // else if (cButton.dataset.correct === "false") {
-    //     changeAnswerColorRed(cButton)
-    //     scoreDisplay.innerText = `Player Score : ${points}`
-    // }
-    // if (dButton.dataset.correct === "true"){
-    //     changeAnswerColorGreen(dButton)
-    //     points ++
-    //     scoreDisplay.innerText = `Player Score : ${points}`
-        
-    // }
-    // else if (dButton.dataset.correct === "false") {
-    //     changeAnswerColorRed(dButton)
-    //     scoreDisplay.innerText = `Player Score : ${points}`
-    // }
     nextButton.disabled = false
     console.log("working")
 }
