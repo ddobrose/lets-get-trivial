@@ -1,13 +1,8 @@
 # Lets-get-Trivial
 
-**Live Link** [play here]
+**Live Link** [play here] (https://git.generalassemb.ly/ddobrose01/Lets-get-Trivial)
 ## Objective
 
-ParaA
-
-ParaB
-
-ParaC
 
 ----------
 
