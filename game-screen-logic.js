@@ -136,6 +136,7 @@ function initialize() {
     nextButton.innerText = "Next Question"
     endItems.forEach(addHidden)
     document.querySelector(".restart-end").classList.add("hidden")
+    endScreenAudioButton.classList.add('hidden')
     showGame()
 
     //start game button and restart button
