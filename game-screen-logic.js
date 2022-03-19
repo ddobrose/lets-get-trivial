@@ -344,11 +344,6 @@ function selectAnswer(event) {
     console.log("working")
 }
 
-
-function selectAnswerMod(element) {
-    
-}
-
 let startGameButton = document.querySelector(".startGame")
 let startGameAudio = document.querySelector('.startGameAudio')
     let gameItems = document.querySelectorAll(".game")
