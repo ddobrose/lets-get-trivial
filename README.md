@@ -1,6 +1,6 @@
 # Lets-get-Trivial
 
-**Live Link** [play here] (https://git.generalassemb.ly/ddobrose01/Lets-get-Trivial)
+**Live Link** (https://ddobrose.github.io/lets-get-trivial/)
 ## Objective
 
 
